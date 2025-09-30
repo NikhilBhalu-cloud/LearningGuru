@@ -1,0 +1,21 @@
+<div class="section-container">
+  <div class="section-header">
+    <h1>🎓 Advanced Topics</h1>
+    <p class="section-description">
+      Master these advanced C# concepts to become a proficient developer. These topics cover modern features
+      and advanced programming patterns.
+    </p>
+  </div>
+
+  <div class="topics-list" *ngIf="filteredTopics.length > 0">
+    <app-topic-card 
+      *ngFor="let topic of filteredTopics" 
+      [topic]="topic"
+      (toggleCompletion)="onToggleCompletion($event)">
+    </app-topic-card>
+  </div>
+
+  <div class="no-topics" *ngIf="filteredTopics.length === 0">
+    <p>No topics found. Try a different search term.</p>
+  </div>
+</div>

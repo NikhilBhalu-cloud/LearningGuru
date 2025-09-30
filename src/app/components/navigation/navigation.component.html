@@ -1,0 +1,33 @@
+<nav class="navbar">
+  <div class="nav-left">
+    <button class="menu-button" (click)="onSidebarToggle()" title="Toggle Menu">
+      ☰
+    </button>
+    <h1 class="logo">LearningGuru</h1>
+  </div>
+
+  <div class="nav-center">
+    <div class="nav-links">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+      <a routerLink="/beginner" routerLinkActive="active">Beginner</a>
+      <a routerLink="/intermediate" routerLinkActive="active">Intermediate</a>
+      <a routerLink="/advanced" routerLinkActive="active">Advanced</a>
+    </div>
+  </div>
+
+  <div class="nav-right">
+    <div class="search-container" [class.active]="showSearch">
+      <input 
+        *ngIf="showSearch"
+        type="text" 
+        class="search-input" 
+        [(ngModel)]="searchTerm" 
+        (input)="onSearch()"
+        placeholder="Search topics..."
+        autofocus>
+      <button class="search-button" (click)="toggleSearch()" title="Search">
+        🔍
+      </button>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,43 @@
+<aside class="sidebar" [class.open]="isOpen">
+  <div class="sidebar-content">
+    <div class="section">
+      <h3>Learning Sections</h3>
+      <ul class="section-list">
+        <li>
+          <a routerLink="/beginner" routerLinkActive="active">
+            <span class="icon">📚</span>
+            <span class="text">Beginner</span>
+          </a>
+          <div class="progress-bar">
+            <div class="progress-fill" [style.width.%]="beginnerProgress"></div>
+          </div>
+        </li>
+        <li>
+          <a routerLink="/intermediate" routerLinkActive="active">
+            <span class="icon">📖</span>
+            <span class="text">Intermediate</span>
+          </a>
+          <div class="progress-bar">
+            <div class="progress-fill" [style.width.%]="intermediateProgress"></div>
+          </div>
+        </li>
+        <li>
+          <a routerLink="/advanced" routerLinkActive="active">
+            <span class="icon">🎓</span>
+            <span class="text">Advanced</span>
+          </a>
+          <div class="progress-bar">
+            <div class="progress-fill" [style.width.%]="advancedProgress"></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="section overall-progress">
+      <h3>Overall Progress</h3>
+      <div class="progress-circle">
+        <div class="progress-value">{{overallProgress}}%</div>
+      </div>
+    </div>
+  </div>
+</aside>

@@ -1,0 +1,83 @@
+<div class="container">
+  <h1 class="section-title">Beginner Level - C# Learning Topics</h1>
+  
+  <div *ngIf="loading" class="loading-container">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <mat-accordion *ngIf="!loading" class="topics-accordion">
+    <mat-expansion-panel *ngFor="let topic of topics" class="topic-panel">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon class="topic-icon">code</mat-icon>
+          {{ topic.name }}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="topic-content">
+        <!-- Explanation Section -->
+        <mat-card class="content-card">
+          <mat-card-header>
+            <mat-card-title>
+              <mat-icon>description</mat-icon>
+              Explanation
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div [innerHTML]="topic.explanation" class="explanation-text"></div>
+          </mat-card-content>
+        </mat-card>
+
+        <!-- Code Example Section -->
+        <mat-card class="content-card code-card">
+          <mat-card-header>
+            <mat-card-title>
+              <mat-icon>code</mat-icon>
+              Code Example
+            </mat-card-title>
+            <button mat-icon-button 
+                    (click)="copyCode(topic.codeExample)" 
+                    matTooltip="Copy code"
+                    class="copy-button">
+              <mat-icon>content_copy</mat-icon>
+            </button>
+          </mat-card-header>
+          <mat-card-content>
+            <pre><code class="csharp-code">{{ topic.codeExample }}</code></pre>
+          </mat-card-content>
+        </mat-card>
+
+        <!-- Key Points Section -->
+        <mat-card class="content-card">
+          <mat-card-header>
+            <mat-card-title>
+              <mat-icon>checklist</mat-icon>
+              Key Points
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <ul class="key-points-list">
+              <li *ngFor="let point of topic.keyPoints">
+                <mat-icon class="point-icon">check_circle</mat-icon>
+                {{ point }}
+              </li>
+            </ul>
+          </mat-card-content>
+        </mat-card>
+
+        <!-- Exercise Section (if available) -->
+        <mat-card *ngIf="topic.exercise" class="content-card exercise-card">
+          <mat-card-header>
+            <mat-card-title>
+              <mat-icon>fitness_center</mat-icon>
+              Practice Exercise
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p class="exercise-text">{{ topic.exercise }}</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

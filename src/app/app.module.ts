@@ -38,7 +38,7 @@ import { BeginnerSectionComponent } from './components/beginner-section/beginner
     HeaderComponent,
     FooterComponent,
     NavigationComponent,
-    BeginnerSectionComponent
+    BeginnerSectionComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,9 +54,9 @@ import { BeginnerSectionComponent } from './components/beginner-section/beginner
     ClipboardModule,
     MatCardModule,
     MatExpansionModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

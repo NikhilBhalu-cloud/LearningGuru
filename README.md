@@ -1,30 +1,32 @@
 # LearningGuru
 
-A comprehensive C# learning platform built with Angular and Angular Material. This application provides structured learning content for mastering C# programming from beginner to expert level.
+A modern, interactive C# learning platform built with Angular 17, PrimeNG, and TailwindCSS. This application provides a Udemy/Coursera-style course player experience for mastering C# programming from beginner to expert level.
 
-## Features
+## ✨ Features
 
-- 📚 **Comprehensive Topics**: Complete coverage of C# fundamentals including:
-  - Basics (Variables, Data Types, Operators, Type Conversion, Console I/O, Comments)
-  - Control Flow (if/else, switch, loops)
-  - Methods (Declaration, Overloading)
-  - Arrays and Strings
-  - Exception Handling
-  - Object-Oriented Programming (Classes, Objects, Constructors, Access Modifiers)
+- 🎓 **Course Player Interface**: Modern, distraction-free learning experience inspired by Udemy and Coursera
+- 📚 **16 Comprehensive Topics**: Organized into three difficulty levels:
+  - **Beginner** (6 topics): Variables, Operators, Type Conversion, Console I/O, Comments, If/Else
+  - **Intermediate** (6 topics): Switch, Loops, Methods, Overloading, Arrays, Strings
+  - **Advanced** (4 topics): Exception Handling, OOP Basics, Constructors, Access Modifiers
+- 🎨 **Modern UI Stack**: PrimeNG components + TailwindCSS for beautiful, responsive design
+- 🔄 **Sequential Navigation**: Previous/Next buttons for smooth topic-by-topic learning
+- 📊 **Progress Tracking**: Visual progress bar showing your current position in the course
+- 💻 **Syntax-Highlighted Code**: Clean, readable code examples with copy functionality
+- 🎯 **Focused Learning**: One topic at a time with detailed explanations and practical examples
+- ✅ **Key Points**: Bullet-point summaries for quick reference
+- 🏋️ **Practice Exercises**: Hands-on exercises to reinforce learning
+- 📱 **Fully Responsive**: Optimized for desktop, tablet, and mobile devices
+- ⚡ **Smooth Transitions**: Animated page transitions for enhanced UX
 
-- 🎨 **Modern UI**: Built with Angular Material for a beautiful, responsive interface
-- 📱 **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
-- 💻 **Code Examples**: Every topic includes detailed C# code examples
-- 📋 **Copy Functionality**: One-click code copying for easy practice
-- ✅ **Key Points**: Summarized takeaways for each topic
-- 🏋️ **Practice Exercises**: Optional exercises to reinforce learning
+## 🚀 Quick Start
 
-## Prerequisites
+### Prerequisites
 
 - Node.js (v14 or higher)
 - npm (v6 or higher)
 
-## Installation
+### Installation
 
 1. Clone the repository:
 ```bash
@@ -37,16 +39,73 @@ cd LearningGuru
 npm install
 ```
 
-## Running the Application
-
-Start the development server:
+3. Start the development server:
 ```bash
 npm start
 ```
 
-Navigate to `http://localhost:4200/` in your browser. The application will automatically reload if you change any of the source files.
+4. Open your browser and navigate to `http://localhost:4200/`
 
-## Building for Production
+## 🏗️ Project Structure
+
+```
+src/
+├── app/
+│   ├── pages/
+│   │   ├── home/                  # Landing page with "Begin Learning" button
+│   │   └── learning-page/         # Main learning interface
+│   ├── components/
+│   │   ├── header/                # Top navbar with section name & progress
+│   │   ├── footer/                # Footer component
+│   │   └── navigation/            # Previous/Next navigation buttons
+│   ├── services/
+│   │   └── topic.service.ts       # Topic content provider with navigation logic
+│   ├── models/
+│   │   └── topic.ts               # Topic data model
+│   ├── app-routing.module.ts      # Route configuration
+│   ├── app.component.*            # Root component
+│   └── app.module.ts              # Main module with PrimeNG imports
+├── assets/                         # Static assets
+├── styles.css                      # Global styles with Tailwind directives
+└── index.html                      # Main HTML file
+```
+
+## 🛠️ Technologies Used
+
+- **Angular 17**: Modern frontend framework
+- **PrimeNG 17**: Rich UI component library
+- **TailwindCSS**: Utility-first CSS framework
+- **TypeScript**: Type-safe programming
+- **RxJS**: Reactive programming
+- **Angular CDK**: Component Dev Kit for clipboard functionality
+
+## 🎯 Learning Flow
+
+1. **Start**: Click "Begin Learning" on the home page
+2. **Learn**: Read through topic explanations, code examples, and key points
+3. **Navigate**: Use Previous/Next buttons to move between topics
+4. **Progress**: Track your progress with the visual progress bar
+5. **Practice**: Complete exercises to reinforce your understanding
+6. **Advance**: Progress from Beginner → Intermediate → Advanced levels
+
+## 🎨 UI Features
+
+### Home Page
+- Gradient background with modern design
+- Clear call-to-action button
+- Responsive layout
+
+### Learning Page
+- **Header**: Shows current section (Beginner/Intermediate/Advanced) and progress
+- **Main Content**: 
+  - Topic title and detailed explanation
+  - Code examples in dark-themed code blocks
+  - Key points in highlighted cards
+  - Practice exercises when available
+- **Navigation**: Sticky bottom navigation with Previous/Next buttons
+- **Footer**: Copyright and branding information
+
+## 📦 Building for Production
 
 Build the project:
 ```bash
@@ -55,90 +114,49 @@ npm run build
 
 The build artifacts will be stored in the `dist/` directory.
 
-## Project Structure
+## 🧪 Testing
 
-```
-src/
-├── app/
-│   ├── components/
-│   │   └── beginner-section/     # Beginner level topics component
-│   ├── models/
-│   │   └── topic.ts               # Topic data model
-│   ├── services/
-│   │   └── topic.service.ts       # Service with all topic data
-│   ├── app.component.*            # Root component
-│   └── app.module.ts              # Main module with Material imports
-├── assets/                        # Static assets
-├── styles.css                     # Global styles
-└── index.html                     # Main HTML file
+Run unit tests:
+```bash
+npm test
 ```
 
-## Technologies Used
-
-- **Angular 17**: Frontend framework
-- **Angular Material**: UI component library
-- **TypeScript**: Programming language
-- **RxJS**: Reactive programming
-- **CSS3**: Styling with custom responsive design
-
-## Features in Detail
-
-### Expansion Panels
-Each topic is presented in an expandable panel for easy navigation and focused learning.
-
-### Code Examples
-All code examples are syntax-highlighted and include:
-- Detailed comments
-- Best practices
-- Real-world use cases
-
-### Copy to Clipboard
-Every code example includes a copy button for quick copying to practice editors.
-
-### Responsive Layout
-The application adapts to all screen sizes:
-- Desktop: Full-width layout with optimal reading experience
-- Tablet: Adjusted spacing and font sizes
-- Mobile: Single-column layout with touch-friendly controls
-
-## Contributing
+## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## License
+## 📄 License
 
 This project is licensed under the MIT License.
 
-## Author
+## 👤 Author
 
 NikhilBhalu-cloud
 
 ---
 
-**Happy Learning! 🚀**App
+**Happy Learning! 🚀**
+
+## Angular CLI Commands
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.17.
 
-## Development server
+### Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+### Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+### Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+### Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
+### Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

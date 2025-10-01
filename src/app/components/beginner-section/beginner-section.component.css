@@ -36,7 +36,11 @@
 
 .topic-icon {
   margin-right: 12px;
+
   color: #3f51b5;
+
+  font-size: 1.5rem;
+
 }
 
 .topic-content {
@@ -62,9 +66,11 @@
   margin: 0;
 }
 
-.content-card mat-card-title mat-icon {
+
+.content-card mat-card-title .icon-emoji {
   margin-right: 8px;
-  color: #3f51b5;
+  font-size: 1.5rem;
+
 }
 
 .code-card mat-card-header {
@@ -73,8 +79,10 @@
   position: relative;
 }
 
-.code-card mat-card-title mat-icon {
-  color: #4fc3f7;
+
+.code-card mat-card-title .icon-emoji {
+  font-size: 1.5rem;
+
 }
 
 .copy-button {
@@ -82,6 +90,11 @@
   right: 8px;
   top: 8px;
   color: white;
+}
+
+
+.copy-button .icon-emoji {
+  font-size: 1.2rem;
 }
 
 .copy-button:hover {
@@ -143,10 +156,12 @@
 }
 
 .point-icon {
-  color: #4caf50;
+
   margin-right: 12px;
   margin-top: 2px;
   flex-shrink: 0;
+  font-size: 1.2rem;
+
 }
 
 .exercise-card {

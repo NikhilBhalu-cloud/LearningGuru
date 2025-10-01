@@ -9,7 +9,9 @@
     <mat-expansion-panel *ngFor="let topic of topics" class="topic-panel">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <mat-icon class="topic-icon">code</mat-icon>
+
+          <span class="topic-icon">💻</span>
+
           {{ topic.name }}
         </mat-panel-title>
       </mat-expansion-panel-header>
@@ -19,7 +21,9 @@
         <mat-card class="content-card">
           <mat-card-header>
             <mat-card-title>
-              <mat-icon>description</mat-icon>
+
+              <span class="icon-emoji">📝</span>
+
               Explanation
             </mat-card-title>
           </mat-card-header>
@@ -32,14 +36,18 @@
         <mat-card class="content-card code-card">
           <mat-card-header>
             <mat-card-title>
-              <mat-icon>code</mat-icon>
+
+              <span class="icon-emoji">💻</span>
+
               Code Example
             </mat-card-title>
             <button mat-icon-button 
                     (click)="copyCode(topic.codeExample)" 
                     matTooltip="Copy code"
                     class="copy-button">
-              <mat-icon>content_copy</mat-icon>
+
+              <span class="icon-emoji">📋</span>
+
             </button>
           </mat-card-header>
           <mat-card-content>
@@ -51,14 +59,18 @@
         <mat-card class="content-card">
           <mat-card-header>
             <mat-card-title>
-              <mat-icon>checklist</mat-icon>
+
+              <span class="icon-emoji">📌</span>
+
               Key Points
             </mat-card-title>
           </mat-card-header>
           <mat-card-content>
             <ul class="key-points-list">
               <li *ngFor="let point of topic.keyPoints">
-                <mat-icon class="point-icon">check_circle</mat-icon>
+
+                <span class="point-icon">✅</span>
+
                 {{ point }}
               </li>
             </ul>
@@ -69,7 +81,9 @@
         <mat-card *ngIf="topic.exercise" class="content-card exercise-card">
           <mat-card-header>
             <mat-card-title>
-              <mat-icon>fitness_center</mat-icon>
+
+              <span class="icon-emoji">💪</span>
+
               Practice Exercise
             </mat-card-title>
           </mat-card-header>

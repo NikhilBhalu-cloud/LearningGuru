@@ -1771,4 +1771,38 @@ Console.WriteLine("Access modifiers demonstration completed!");`,
   getTopicById(id: string): Observable<Topic | undefined> {
     return of(this.topics.find(topic => topic.id === id));
   }
+
+  getTopicByIndex(index: number): Observable<Topic | undefined> {
+    return of(this.topics[index]);
+  }
+
+  getNextTopic(currentId: string): Observable<Topic | undefined> {
+    const currentIndex = this.topics.findIndex(topic => topic.id === currentId);
+    if (currentIndex !== -1 && currentIndex < this.topics.length - 1) {
+      return of(this.topics[currentIndex + 1]);
+    }
+    return of(undefined);
+  }
+
+  getPreviousTopic(currentId: string): Observable<Topic | undefined> {
+    const currentIndex = this.topics.findIndex(topic => topic.id === currentId);
+    if (currentIndex > 0) {
+      return of(this.topics[currentIndex - 1]);
+    }
+    return of(undefined);
+  }
+
+  getTopicProgress(currentId: string): { current: number; total: number; section: string } {
+    const currentIndex = this.topics.findIndex(topic => topic.id === currentId);
+    const currentTopic = this.topics[currentIndex];
+    return {
+      current: currentIndex + 1,
+      total: this.topics.length,
+      section: currentTopic?.section || 'Unknown'
+    };
+  }
+
+  getFirstTopic(): Observable<Topic | undefined> {
+    return of(this.topics[0]);
+  }
 }

@@ -458,7 +458,7 @@ Console.WriteLine($"Status: {status}");`,
     {
       id: 'control-switch',
       name: 'switch statements',
-      section: 'Beginner',
+      section: 'Intermediate',
       explanation: `
         <h3>switch Statement</h3>
         <p>Tests a variable against multiple cases. More readable than multiple if-else for many conditions.</p>
@@ -572,7 +572,7 @@ Console.WriteLine($"Day type: {dayType}");`,
     {
       id: 'control-loops',
       name: 'Loops: for, while, do-while, foreach',
-      section: 'Beginner',
+      section: 'Intermediate',
       explanation: `
         <h3>for Loop</h3>
         <p>Used when the number of iterations is known.</p>
@@ -667,7 +667,7 @@ Console.WriteLine("All loops completed!");`,
     {
       id: 'methods-basics',
       name: 'Method Declaration, Parameters, Return Types',
-      section: 'Beginner',
+      section: 'Intermediate',
       explanation: `
         <h3>Methods</h3>
         <p>Methods are reusable blocks of code that perform specific tasks.</p>
@@ -770,7 +770,7 @@ Console.WriteLine($"Sum: {sum}, Result: {result}, Total: {total}");`,
     {
       id: 'methods-overloading',
       name: 'Method Overloading',
-      section: 'Beginner',
+      section: 'Intermediate',
       explanation: `
         <h3>Method Overloading</h3>
         <p>Multiple methods with the same name but different parameters (number, type, or order).</p>
@@ -883,7 +883,7 @@ Console.WriteLine($"Circle: {circleArea:F2}, Rectangle: {rectArea}, Triangle: {t
     {
       id: 'arrays-basics',
       name: 'Single-dimensional and Multi-dimensional Arrays',
-      section: 'Beginner',
+      section: 'Intermediate',
       explanation: `
         <h3>Single-dimensional Arrays</h3>
         <p>Collection of elements of the same type, stored in contiguous memory.</p>
@@ -984,7 +984,7 @@ Console.WriteLine($"Index of 8: {index}");`,
     {
       id: 'strings-operations',
       name: 'String Operations and Methods',
-      section: 'Beginner',
+      section: 'Intermediate',
       explanation: `
         <h3>Strings in C#</h3>
         <p>Strings are immutable reference types representing text. Every modification creates a new string.</p>
@@ -1090,7 +1090,7 @@ Console.WriteLine($"Is null or whitespace: {isNullOrWhiteSpace}");`,
     {
       id: 'exception-handling',
       name: 'try-catch-finally and Custom Exceptions',
-      section: 'Beginner',
+      section: 'Advanced',
       explanation: `
         <h3>Exception Handling</h3>
         <p>Mechanism to handle runtime errors gracefully without crashing the application.</p>
@@ -1244,7 +1244,7 @@ Console.WriteLine("Exception handling demonstration completed!");`,
     {
       id: 'oop-intro',
       name: 'Classes, Objects, Fields, Properties, Methods',
-      section: 'Beginner',
+      section: 'Advanced',
       explanation: `
         <h3>Object-Oriented Programming</h3>
         <p>Programming paradigm based on objects that contain data and code.</p>
@@ -1400,7 +1400,7 @@ Console.WriteLine("OOP basics demonstration completed!");`,
     {
       id: 'oop-constructors',
       name: 'Constructors and Destructors',
-      section: 'Beginner',
+      section: 'Advanced',
       explanation: `
         <h3>Constructors</h3>
         <p>Special methods called when an object is created. Initialize object state.</p>
@@ -1564,7 +1564,7 @@ Console.WriteLine("Constructor demonstration completed!");`,
     {
       id: 'oop-access-modifiers',
       name: 'Access Modifiers (public, private, protected, internal)',
-      section: 'Beginner',
+      section: 'Advanced',
       explanation: `
         <h3>Access Modifiers</h3>
         <p>Keywords that set the accessibility level of classes, methods, and properties.</p>
@@ -1770,5 +1770,39 @@ Console.WriteLine("Access modifiers demonstration completed!");`,
 
   getTopicById(id: string): Observable<Topic | undefined> {
     return of(this.topics.find(topic => topic.id === id));
+  }
+
+  getTopicByIndex(index: number): Observable<Topic | undefined> {
+    return of(this.topics[index]);
+  }
+
+  getNextTopic(currentId: string): Observable<Topic | undefined> {
+    const currentIndex = this.topics.findIndex(topic => topic.id === currentId);
+    if (currentIndex !== -1 && currentIndex < this.topics.length - 1) {
+      return of(this.topics[currentIndex + 1]);
+    }
+    return of(undefined);
+  }
+
+  getPreviousTopic(currentId: string): Observable<Topic | undefined> {
+    const currentIndex = this.topics.findIndex(topic => topic.id === currentId);
+    if (currentIndex > 0) {
+      return of(this.topics[currentIndex - 1]);
+    }
+    return of(undefined);
+  }
+
+  getTopicProgress(currentId: string): { current: number; total: number; section: string } {
+    const currentIndex = this.topics.findIndex(topic => topic.id === currentId);
+    const currentTopic = this.topics[currentIndex];
+    return {
+      current: currentIndex + 1,
+      total: this.topics.length,
+      section: currentTopic?.section || 'Unknown'
+    };
+  }
+
+  getFirstTopic(): Observable<Topic | undefined> {
+    return of(this.topics[0]);
   }
 }

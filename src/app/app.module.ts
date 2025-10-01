@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +13,11 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { TooltipModule } from 'primeng/tooltip';
 
+// Angular Material Modules
+import { MatCardModule } from '@angular/material/card';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 // Angular CDK
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { CommonModule } from '@angular/common';
@@ -22,6 +28,7 @@ import { LearningPageComponent } from './pages/learning-page/learning-page.compo
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { BeginnerSectionComponent } from './components/beginner-section/beginner-section.component';
 
 @NgModule({
   declarations: [
@@ -30,11 +37,13 @@ import { NavigationComponent } from './components/navigation/navigation.componen
     LearningPageComponent,
     HeaderComponent,
     FooterComponent,
-    NavigationComponent
+    NavigationComponent,
+    BeginnerSectionComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    RouterModule,
     AppRoutingModule,
     CommonModule,
     ButtonModule,
@@ -42,7 +51,10 @@ import { NavigationComponent } from './components/navigation/navigation.componen
     ProgressBarModule,
     ProgressSpinnerModule,
     TooltipModule,
-    ClipboardModule
+    ClipboardModule,
+    MatCardModule,
+    MatExpansionModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

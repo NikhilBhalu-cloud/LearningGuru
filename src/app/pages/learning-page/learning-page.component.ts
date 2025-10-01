@@ -19,7 +19,7 @@ import { Clipboard } from '@angular/cdk/clipboard';
   ]
 })
 export class LearningPageComponent implements OnInit {
-  currentTopic?: Topic;
+  currentTopic: Topic | null = null;
   hasPrevious: boolean = false;
   hasNext: boolean = false;
   progress = { current: 0, total: 0, section: '' };

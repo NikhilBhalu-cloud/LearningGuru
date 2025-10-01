@@ -1,11 +1,19 @@
 <div class="app-container">
-  <app-navigation (sidebarToggle)="toggleSidebar()"></app-navigation>
-  
-  <div class="main-content">
-    <app-sidebar [isOpen]="isSidebarOpen" class="sidebar"></app-sidebar>
-    
-    <div class="content" [class.sidebar-open]="isSidebarOpen">
-      <router-outlet></router-outlet>
+  <header class="app-header">
+    <div class="header-content">
+      <h1>
+        <span class="logo-icon">🎓</span>
+        LearningGuru
+      </h1>
+      <p class="subtitle">Master C# Programming - From Beginner to Expert</p>
     </div>
-  </div>
+  </header>
+
+  <main class="app-main">
+    <app-beginner-section></app-beginner-section>
+  </main>
+
+  <footer class="app-footer">
+    <p>&copy; 2024 LearningGuru. All rights reserved.</p>
+  </footer>
 </div>

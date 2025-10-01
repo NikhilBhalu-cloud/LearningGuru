@@ -12,6 +12,12 @@ import { CardModule } from 'primeng/card';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { TooltipModule } from 'primeng/tooltip';
+import { TreeModule } from 'primeng/tree';
+import { SidebarModule } from 'primeng/sidebar';
+import { MenuModule } from 'primeng/menu';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { FormsModule } from '@angular/forms';
 
 // Angular Material Modules
 import { MatCardModule } from '@angular/material/card';
@@ -29,6 +35,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { BeginnerSectionComponent } from './components/beginner-section/beginner-section.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +47,8 @@ import { BeginnerSectionComponent } from './components/beginner-section/beginner
     FooterComponent,
     NavigationComponent,
     BeginnerSectionComponent,
+    SidebarComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,11 +56,17 @@ import { BeginnerSectionComponent } from './components/beginner-section/beginner
     RouterModule,
     AppRoutingModule,
     CommonModule,
+    FormsModule,
     ButtonModule,
     CardModule,
     ProgressBarModule,
     ProgressSpinnerModule,
     TooltipModule,
+    TreeModule,
+    SidebarModule,
+    MenuModule,
+    OverlayPanelModule,
+    InputSwitchModule,
     ClipboardModule,
     MatCardModule,
     MatExpansionModule,

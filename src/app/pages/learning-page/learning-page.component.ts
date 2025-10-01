@@ -26,13 +26,16 @@ export class LearningPageComponent implements OnInit {
   hasPrevious: boolean = false;
   hasNext: boolean = false;
   progress = { current: 0, total: 0, section: '' };
+  isSidebarCollapsed: boolean = false;
 
   constructor(
     private topicService: TopicService,
     private router: Router,
     private route: ActivatedRoute,
     private clipboard: Clipboard
-  ) {}
+  ) {
+    this.loadSidebarState();
+  }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
@@ -97,6 +100,18 @@ export class LearningPageComponent implements OnInit {
   copyCode(): void {
     if (this.currentTopic) {
       this.clipboard.copy(this.currentTopic.codeExample);
+    }
+  }
+
+  toggleSidebar(): void {
+    this.isSidebarCollapsed = !this.isSidebarCollapsed;
+    localStorage.setItem('sidebarCollapsed', this.isSidebarCollapsed.toString());
+  }
+
+  loadSidebarState(): void {
+    const savedState = localStorage.getItem('sidebarCollapsed');
+    if (savedState !== null) {
+      this.isSidebarCollapsed = savedState === 'true';
     }
   }
 }

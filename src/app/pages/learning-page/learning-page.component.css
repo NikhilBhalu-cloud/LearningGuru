@@ -1,0 +1,59 @@
+.learning-page-container {
+  min-height: 100vh;
+}
+
+/* Dark mode card styling */
+::ng-deep .dark .p-card {
+  background-color: #1f2937;
+  border-color: #374151;
+  color: #e5e7eb;
+}
+
+::ng-deep .dark .p-card .p-card-body {
+  color: #e5e7eb;
+}
+
+::ng-deep .dark .p-card .p-card-content {
+  color: #e5e7eb;
+}
+
+/* Dark mode for explanation HTML content */
+::ng-deep .dark .prose h3 {
+  color: #e5e7eb;
+}
+
+::ng-deep .dark .prose p {
+  color: #d1d5db;
+}
+
+::ng-deep .dark .prose ul {
+  color: #d1d5db;
+}
+
+::ng-deep .dark .prose li {
+  color: #d1d5db;
+}
+
+::ng-deep .dark .prose strong {
+  color: #f3f4f6;
+}
+
+::ng-deep .dark .prose code {
+  color: #fbbf24;
+  background-color: #374151;
+}
+
+/* Smooth transitions */
+.learning-page-container * {
+  transition-property: background-color, border-color, color;
+  transition-duration: 300ms;
+  transition-timing-function: ease-in-out;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}

@@ -1,0 +1,37 @@
+<div 
+  class="sidebar h-full flex flex-col bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 transition-all duration-300"
+  [ngClass]="{'collapsed': isCollapsed, 'expanded': !isCollapsed}">
+  
+  <!-- Sidebar Header -->
+  <div class="sidebar-header p-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
+    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200" [ngClass]="{'hidden': isCollapsed}">
+      Learning Path
+    </h3>
+    <button 
+      pButton 
+      [icon]="isCollapsed ? 'pi pi-angle-right' : 'pi pi-angle-left'"
+      class="p-button-text p-button-rounded p-button-sm"
+      (click)="toggleCollapse()"
+      pTooltip="Toggle Sidebar"
+      tooltipPosition="right">
+    </button>
+  </div>
+
+  <!-- Tree Content -->
+  <div class="sidebar-content flex-1 overflow-y-auto p-3" *ngIf="!isCollapsed">
+    <p-tree 
+      [value]="treeData" 
+      selectionMode="single"
+      [(selection)]="selectedNode"
+      (onNodeSelect)="onNodeSelect($event)"
+      styleClass="w-full border-0">
+    </p-tree>
+  </div>
+
+  <!-- Collapsed state icon display -->
+  <div class="flex-1 flex flex-col items-center pt-6 gap-4" *ngIf="isCollapsed">
+    <i class="pi pi-star text-2xl text-gray-600 dark:text-gray-400" pTooltip="Beginner" tooltipPosition="right"></i>
+    <i class="pi pi-chart-line text-2xl text-gray-600 dark:text-gray-400" pTooltip="Intermediate" tooltipPosition="right"></i>
+    <i class="pi pi-trophy text-2xl text-gray-600 dark:text-gray-400" pTooltip="Advanced" tooltipPosition="right"></i>
+  </div>
+</div>

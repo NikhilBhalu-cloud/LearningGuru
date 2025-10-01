@@ -17,6 +17,11 @@ body {
   margin: 0; 
   font-family: 'Inter', Roboto, "Helvetica Neue", sans-serif;
   background-color: #f5f5f5;
+  transition: background-color 0.3s ease;
+}
+
+.dark body {
+  background-color: #111827;
 }
 
 * {
@@ -32,6 +37,10 @@ body {
   background: #f1f1f1;
 }
 
+.dark ::-webkit-scrollbar-track {
+  background: #1f2937;
+}
+
 ::-webkit-scrollbar-thumb {
   background: #888;
   border-radius: 5px;
@@ -39,4 +48,55 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #4b5563;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}
+
+/* Dark mode PrimeNG overrides */
+.dark .p-component {
+  color: #e5e7eb;
+}
+
+.dark .p-button {
+  background-color: #4f46e5;
+  border-color: #4f46e5;
+  color: #ffffff;
+}
+
+.dark .p-button:hover {
+  background-color: #4338ca;
+  border-color: #4338ca;
+}
+
+.dark .p-button.p-button-text {
+  background-color: transparent;
+  color: #e5e7eb;
+}
+
+.dark .p-button.p-button-text:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.dark .p-button.p-button-outlined {
+  background-color: transparent;
+  color: #e5e7eb;
+  border-color: #4b5563;
+}
+
+.dark .p-button.p-button-outlined:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: #6b7280;
+}
+
+/* Smooth transitions for theme switching */
+* {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: ease-in-out;
+  transition-duration: 200ms;
 }

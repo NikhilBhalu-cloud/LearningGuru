@@ -1,0 +1,90 @@
+.sidebar {
+  min-height: 100vh;
+}
+
+.sidebar.expanded {
+  width: 280px;
+}
+
+.sidebar.collapsed {
+  width: 60px;
+}
+
+.sidebar-content {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e0 transparent;
+}
+
+.sidebar-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-content::-webkit-scrollbar-thumb {
+  background-color: #cbd5e0;
+  border-radius: 3px;
+}
+
+.dark .sidebar-content::-webkit-scrollbar-thumb {
+  background-color: #4a5568;
+}
+
+/* PrimeNG Tree customization */
+::ng-deep .p-tree {
+  border: none !important;
+  background: transparent !important;
+}
+
+::ng-deep .p-tree .p-tree-container .p-treenode {
+  padding: 0.25rem 0;
+}
+
+::ng-deep .p-tree .p-treenode-content {
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+::ng-deep .p-tree .p-treenode-content:hover {
+  background-color: #f3f4f6;
+}
+
+::ng-deep .dark .p-tree .p-treenode-content:hover {
+  background-color: #374151;
+}
+
+::ng-deep .p-tree .p-treenode-content.p-highlight {
+  background-color: #e0e7ff !important;
+  color: #4338ca !important;
+}
+
+::ng-deep .dark .p-tree .p-treenode-content.p-highlight {
+  background-color: #3730a3 !important;
+  color: #e0e7ff !important;
+}
+
+::ng-deep .p-tree .section-node > .p-treenode-content {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+::ng-deep .p-tree .topic-node > .p-treenode-content {
+  font-size: 0.875rem;
+  padding-left: 0.5rem;
+}
+
+::ng-deep .p-tree .p-tree-toggler {
+  margin-right: 0.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sidebar.expanded {
+    width: 100%;
+    position: absolute;
+    z-index: 1000;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+  }
+}

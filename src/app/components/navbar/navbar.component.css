@@ -1,0 +1,87 @@
+.navbar {
+  height: 64px;
+  backdrop-filter: blur(8px);
+}
+
+.navbar-content {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* PrimeNG customizations */
+::ng-deep .p-inputswitch {
+  height: 1.25rem;
+}
+
+::ng-deep .p-inputswitch .p-inputswitch-slider {
+  background-color: #cbd5e0;
+}
+
+::ng-deep .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
+  background-color: #4f46e5;
+}
+
+::ng-deep .dark .p-inputswitch .p-inputswitch-slider {
+  background-color: #4a5568;
+}
+
+::ng-deep .dark .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
+  background-color: #818cf8;
+}
+
+/* Progress bar customization */
+::ng-deep .p-progressbar {
+  height: 0.5rem;
+  background-color: #e5e7eb;
+  border-radius: 0.25rem;
+  overflow: hidden;
+}
+
+::ng-deep .dark .p-progressbar {
+  background-color: #374151;
+}
+
+::ng-deep .p-progressbar .p-progressbar-value {
+  background: linear-gradient(90deg, #4f46e5 0%, #818cf8 100%);
+}
+
+/* Menu customization */
+::ng-deep .p-menu {
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+::ng-deep .p-menu .p-menuitem-link {
+  padding: 0.75rem 1rem;
+  transition: all 0.2s;
+}
+
+::ng-deep .p-menu .p-menuitem-link:hover {
+  background-color: #f3f4f6;
+}
+
+::ng-deep .dark .p-menu {
+  background-color: #1f2937;
+  border-color: #374151;
+}
+
+::ng-deep .dark .p-menu .p-menuitem-link {
+  color: #e5e7eb;
+}
+
+::ng-deep .dark .p-menu .p-menuitem-link:hover {
+  background-color: #374151;
+}
+
+/* Button customizations */
+::ng-deep .p-button.p-button-rounded {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar {
+    height: 56px;
+  }
+}

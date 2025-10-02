@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { TopicService } from '../../services/topic.service';
-import { Topic } from '../../models/topic';
+import { Topic } from '../../models/section';
 import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-beginner-section',
   templateUrl: './beginner-section.component.html',
-  styleUrls: ['./beginner-section.component.css']
+  styleUrls: ['./beginner-section.component.css'],
 })
 export class BeginnerSectionComponent implements OnInit {
   topics: Topic[] = [];
@@ -15,7 +15,7 @@ export class BeginnerSectionComponent implements OnInit {
   constructor(
     private topicService: TopicService,
     private clipboard: Clipboard
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.loadTopics();
@@ -30,7 +30,7 @@ export class BeginnerSectionComponent implements OnInit {
       error: (error) => {
         console.error('Error loading topics:', error);
         this.loading = false;
-      }
+      },
     });
   }
 

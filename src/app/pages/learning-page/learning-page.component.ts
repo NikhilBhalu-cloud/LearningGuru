@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TopicService } from '../../services/topic.service';
-import { Topic } from '../../models/topic';
+import { Topic } from '../../models/section';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Clipboard } from '@angular/cdk/clipboard';
 
@@ -22,6 +22,8 @@ import { Clipboard } from '@angular/cdk/clipboard';
   ],
 })
 export class LearningPageComponent implements OnInit {
+  @ViewChild('contentSection') contentSection!: ElementRef;
+
   currentTopic: Topic | null = null;
   hasPrevious: boolean = false;
   hasNext: boolean = false;
@@ -38,9 +40,64 @@ export class LearningPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe((params) => {
-      const topicIndex = params['topic'] ? parseInt(params['topic']) : 0;
-      this.loadTopicByIndex(topicIndex);
+    // Subscribe to route changes
+    this.route.paramMap.subscribe((params) => {
+      const section = params.get('section');
+      const topic = params.get('topic');
+
+      if (section && topic) {
+        // New route format: /:section/:topic
+        this.loadTopicBySlug(section, topic);
+      } else if (section) {
+        // Section only: /:section - load first topic from section
+        this.loadFirstTopicFromSection(section);
+      } else {
+        // Legacy format or home page
+        this.route.queryParams.subscribe((queryParams) => {
+          const topicIndex = queryParams['topic']
+            ? parseInt(queryParams['topic'])
+            : 0;
+          this.loadTopicByIndex(topicIndex);
+        });
+      }
+    });
+  }
+
+  loadTopicBySlug(sectionSlug: string, topicSlug: string): void {
+    this.topicService.getTopicBySlug(sectionSlug, topicSlug).subscribe({
+      next: (topic) => {
+        if (topic) {
+          this.currentTopic = topic;
+          this.progress = this.topicService.getTopicProgress(topic.id);
+          this.updateNavigationState();
+
+          // Scroll to top after topic change
+          setTimeout(() => this.scrollToTop(), 0);
+        }
+      },
+      error: (error) => {
+        console.error('Error loading topic:', error);
+        // Redirect to home or first topic if topic not found
+        this.router.navigate(['/']);
+      },
+    });
+  }
+
+  loadFirstTopicFromSection(sectionSlug: string): void {
+    this.topicService.getSectionBySlug(sectionSlug).subscribe({
+      next: (section) => {
+        if (section && section.topics.length > 0) {
+          const firstTopic = section.topics[0];
+          // Redirect to the full path with topic
+          this.router.navigate(['/', sectionSlug, firstTopic.slug || '']);
+        } else {
+          // Section has no topics or doesn't exist
+          this.router.navigate(['/']);
+        }
+      },
+      error: () => {
+        this.router.navigate(['/']);
+      },
     });
   }
 
@@ -50,6 +107,9 @@ export class LearningPageComponent implements OnInit {
         this.currentTopic = topic;
         this.progress = this.topicService.getTopicProgress(topic.id);
         this.updateNavigationState();
+
+        // Scroll to top after topic change (timeout to ensure DOM is updated)
+        setTimeout(() => this.scrollToTop(), 0);
       }
     });
   }
@@ -60,10 +120,32 @@ export class LearningPageComponent implements OnInit {
         .getNextTopic(this.currentTopic.id)
         .subscribe((nextTopic) => {
           if (nextTopic) {
-            const nextIndex = this.progress.current;
-            this.router.navigate(['/learn'], {
-              queryParams: { topic: nextIndex },
-            });
+            const sectionId = nextTopic.sectionId;
+            const topicSlug = nextTopic.slug;
+
+            if (sectionId && topicSlug) {
+              // Find section slug from section ID
+              this.topicService
+                .getSectionById(sectionId)
+                .subscribe((section) => {
+                  if (section) {
+                    // Navigate to new format URL
+                    this.router.navigate(['/', section.slug, topicSlug]);
+                  } else {
+                    // Fallback to legacy format
+                    const nextIndex = this.progress.current;
+                    this.router.navigate(['/learn'], {
+                      queryParams: { topic: nextIndex },
+                    });
+                  }
+                });
+            } else {
+              // Fallback to legacy format if slug not available
+              const nextIndex = this.progress.current;
+              this.router.navigate(['/learn'], {
+                queryParams: { topic: nextIndex },
+              });
+            }
           }
         });
     }
@@ -75,10 +157,32 @@ export class LearningPageComponent implements OnInit {
         .getPreviousTopic(this.currentTopic.id)
         .subscribe((prevTopic) => {
           if (prevTopic) {
-            const prevIndex = this.progress.current - 2;
-            this.router.navigate(['/learn'], {
-              queryParams: { topic: prevIndex },
-            });
+            const sectionId = prevTopic.sectionId;
+            const topicSlug = prevTopic.slug;
+
+            if (sectionId && topicSlug) {
+              // Find section slug from section ID
+              this.topicService
+                .getSectionById(sectionId)
+                .subscribe((section) => {
+                  if (section) {
+                    // Navigate to new format URL
+                    this.router.navigate(['/', section.slug, topicSlug]);
+                  } else {
+                    // Fallback to legacy format
+                    const prevIndex = this.progress.current - 2;
+                    this.router.navigate(['/learn'], {
+                      queryParams: { topic: prevIndex },
+                    });
+                  }
+                });
+            } else {
+              // Fallback to legacy format if slug not available
+              const prevIndex = this.progress.current - 2;
+              this.router.navigate(['/learn'], {
+                queryParams: { topic: prevIndex },
+              });
+            }
           }
         });
     }
@@ -97,6 +201,12 @@ export class LearningPageComponent implements OnInit {
     }
   }
 
+  scrollToTop(): void {
+    if (this.contentSection && this.contentSection.nativeElement) {
+      this.contentSection.nativeElement.scrollTop = 0;
+    }
+  }
+
   copyCode(): void {
     if (this.currentTopic) {
       this.clipboard.copy(this.currentTopic.codeExample);
@@ -105,7 +215,10 @@ export class LearningPageComponent implements OnInit {
 
   toggleSidebar(): void {
     this.isSidebarCollapsed = !this.isSidebarCollapsed;
-    localStorage.setItem('sidebarCollapsed', this.isSidebarCollapsed.toString());
+    localStorage.setItem(
+      'sidebarCollapsed',
+      this.isSidebarCollapsed.toString()
+    );
   }
 
   loadSidebarState(): void {

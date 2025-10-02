@@ -1,106 +1,129 @@
 <div *ngIf="currentTopic" class="learning-page-container">
-  <!-- Navbar -->
-  <app-navbar
-    [sectionName]="progress.section"
-    [currentTopic]="progress.current"
-    [totalTopics]="progress.total"
-    (sidebarToggle)="toggleSidebar()">
-  </app-navbar>
+  <!-- Full Screen Layout -->
+  <div class="full-screen-layout">
+    <!-- Left Sidebar - Full Height -->
+    <div class="sidebar-section">
+      <app-sidebar
+        [isCollapsed]="isSidebarCollapsed"
+        (collapseToggle)="toggleSidebar()"
+      >
+      </app-sidebar>
+    </div>
 
-  <!-- Main Layout with Sidebar -->
-  <div class="flex min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
-    
-    <!-- Sidebar -->
-    <app-sidebar
-      [isCollapsed]="isSidebarCollapsed"
-      (collapseToggle)="toggleSidebar()">
-    </app-sidebar>
+    <!-- Right Section -->
+    <div class="right-section">
+      <!-- Top Navbar -->
+      <div class="navbar-section">
+        <app-navbar
+          [sectionName]="progress.section"
+          [currentTopic]="progress.current"
+          [totalTopics]="progress.total"
+          (sidebarToggle)="toggleSidebar()"
+        >
+        </app-navbar>
+      </div>
 
-    <!-- Main Content Area -->
-    <div class="flex-1 overflow-y-auto transition-all duration-300">
-      <div class="container mx-auto px-4 py-8 max-w-5xl">
-        <div [@fadeIn] class="topic-content">
-          
-          <!-- Topic Card -->
-          <p-card class="mb-6 shadow-lg bg-white dark:bg-gray-800 border-0">
-            <ng-template pTemplate="header">
-              <div class="px-6 pt-6 pb-4">
-                <h1 class="text-3xl font-bold text-gray-800 dark:text-gray-200">
-                  {{ currentTopic.name }}
-                </h1>
-              </div>
-            </ng-template>
+      <!-- Main Content Area -->
+      <div class="content-section" #contentSection>
+        <!-- Topic Header -->
+        <div class="topic-header">
+          <h1 class="topic-title">{{ currentTopic.name }}</h1>
+          <div class="topic-meta">
+            <span class="section-badge">{{ progress.section }}</span>
+            <span class="progress-text"
+              >{{ progress.current }} of {{ progress.total }}</span
+            >
+          </div>
+        </div>
 
-            <div class="space-y-6">
-              <!-- Explanation Section -->
-              <div class="prose dark:prose-invert max-w-none">
-                <div
-                  [innerHTML]="currentTopic.explanation"
-                  class="text-gray-700 dark:text-gray-300 leading-relaxed">
-                </div>
-              </div>
-
-              <!-- Code Example Section -->
-              <div class="bg-gray-900 dark:bg-gray-950 rounded-lg overflow-hidden">
-                <div class="flex items-center justify-between px-4 py-3 bg-gray-800 dark:bg-gray-900">
-                  <div class="flex items-center gap-2">
-                    <i class="pi pi-code text-blue-400"></i>
-                    <span class="text-white font-medium">Code Example</span>
-                  </div>
-                  <button
-                    pButton
-                    icon="pi pi-copy"
-                    class="p-button-text p-button-sm"
-                    (click)="copyCode()"
-                    pTooltip="Copy code"
-                    tooltipPosition="left"
-                    styleClass="text-gray-300 hover:text-white">
-                  </button>
-                </div>
-                <pre class="p-4 overflow-x-auto"><code class="text-sm text-gray-100 font-mono">{{ currentTopic.codeExample }}</code></pre>
-              </div>
-
-              <!-- Key Points Section -->
-              <div class="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6">
-                <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2">
-                  <i class="pi pi-check-circle text-blue-600 dark:text-blue-400"></i>
-                  Key Points
-                </h3>
-                <ul class="space-y-2">
-                  <li
-                    *ngFor="let point of currentTopic.keyPoints"
-                    class="flex items-start gap-2">
-                    <i class="pi pi-angle-right text-blue-600 dark:text-blue-400 mt-1"></i>
-                    <span class="text-gray-700 dark:text-gray-300">{{ point }}</span>
-                  </li>
-                </ul>
-              </div>
-
-              <!-- Exercise Section -->
-              <div
-                *ngIf="currentTopic.exercise"
-                class="bg-green-50 dark:bg-green-900/20 rounded-lg p-6">
-                <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2">
-                  <i class="pi pi-pencil text-green-600 dark:text-green-400"></i>
-                  Practice Exercise
-                </h3>
-                <p class="text-gray-700 dark:text-gray-300">{{ currentTopic.exercise }}</p>
-              </div>
+        <div class="topic-content">
+          <!-- Explanation Section -->
+          <div class="content-section explanation-section">
+            <div class="section-header">
+              <i class="pi pi-book section-icon"></i>
+              <h3 class="section-title">Explanation</h3>
             </div>
-          </p-card>
+            <div class="prose dark:prose-invert max-w-none">
+              <div
+                [innerHTML]="currentTopic.explanation"
+                class="text-content"
+              ></div>
+            </div>
+          </div>
+
+          <!-- Code Example Section -->
+          <div class="content-section code-section">
+            <div class="section-header">
+              <i class="pi pi-code section-icon"></i>
+              <h3 class="section-title">Code Example</h3>
+              <button
+                pButton
+                icon="pi pi-copy"
+                label="Copy"
+                class="p-button-sm p-button-text"
+                (click)="copyCode()"
+              ></button>
+            </div>
+            <div class="code-block">
+              <pre
+                class="code-content"
+              ><code>{{ currentTopic.codeExample }}</code></pre>
+            </div>
+          </div>
+
+          <!-- Key Points Section -->
+          <div class="content-section keypoints-section">
+            <div class="section-header">
+              <i class="pi pi-check-circle section-icon"></i>
+              <h3 class="section-title">Key Points</h3>
+            </div>
+            <ul class="keypoints-list">
+              <li
+                *ngFor="let point of currentTopic.keyPoints"
+                class="keypoint-item"
+              >
+                <i class="pi pi-angle-right keypoint-icon"></i>
+                <span>{{ point }}</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Exercise Section -->
+          <div
+            *ngIf="currentTopic.exercise"
+            class="content-section exercise-section"
+          >
+            <div class="section-header">
+              <i class="pi pi-pencil section-icon"></i>
+              <h3 class="section-title">Practice Exercise</h3>
+            </div>
+            <div class="exercise-content">
+              <p>{{ currentTopic.exercise }}</p>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Navigation -->
-      <app-navigation
-        [hasPrevious]="hasPrevious"
-        [hasNext]="hasNext"
-        (previous)="loadPreviousTopic()"
-        (next)="loadNextTopic()">
-      </app-navigation>
-
-      <!-- Footer -->
-      <app-footer></app-footer>
+      <!-- Fixed Navigation Buttons -->
+      <div class="navigation-fixed">
+        <div class="navigation-buttons">
+          <button
+            pButton
+            label="Previous"
+            icon="pi pi-arrow-left"
+            [disabled]="!hasPrevious"
+            (click)="loadPreviousTopic()"
+          ></button>
+          <button
+            pButton
+            label="Next"
+            icon="pi pi-arrow-right"
+            iconPos="right"
+            [disabled]="!hasNext"
+            (click)="loadNextTopic()"
+          ></button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -108,6 +131,7 @@
 <!-- Loading State -->
 <div
   *ngIf="!currentTopic"
-  class="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+  class="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900"
+>
   <p-progressSpinner></p-progressSpinner>
 </div>

@@ -1,24 +1,47 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core';
+import {
+  Component,
+  Output,
+  EventEmitter,
+  Input,
+  OnInit,
+  OnDestroy,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { ThemeService } from '../../services/theme.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+  styleUrl: './navbar.component.css',
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit, OnDestroy {
   @Input() sectionName: string = '';
   @Input() currentTopic: number = 0;
   @Input() totalTopics: number = 0;
   @Output() sidebarToggle = new EventEmitter<void>();
-  
+
   isDarkMode: boolean = false;
   profileMenuItems: MenuItem[] = [];
+  private themeSubscription: Subscription = new Subscription();
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private themeService: ThemeService) {
     this.initializeProfileMenu();
-    this.loadThemePreference();
+  }
+
+  ngOnInit(): void {
+    // Subscribe to dark mode changes
+    this.themeSubscription = this.themeService.darkMode$.subscribe((isDark) => {
+      this.isDarkMode = isDark;
+    });
+  }
+
+  ngOnDestroy(): void {
+    // Clean up subscription when component is destroyed
+    if (this.themeSubscription) {
+      this.themeSubscription.unsubscribe();
+    }
   }
 
   initializeProfileMenu(): void {
@@ -26,28 +49,22 @@ export class NavbarComponent {
       {
         label: 'Profile',
         icon: 'pi pi-user',
-        command: () => this.navigateToProfile()
+        command: () => this.navigateToProfile(),
       },
       {
         label: 'Settings',
         icon: 'pi pi-cog',
-        command: () => this.navigateToSettings()
+        command: () => this.navigateToSettings(),
       },
       {
-        separator: true
+        separator: true,
       },
       {
         label: 'Logout',
         icon: 'pi pi-sign-out',
-        command: () => this.logout()
-      }
+        command: () => this.logout(),
+      },
     ];
-  }
-
-  loadThemePreference(): void {
-    const savedTheme = localStorage.getItem('theme');
-    this.isDarkMode = savedTheme === 'dark';
-    this.applyTheme();
   }
 
   toggleSidebar(): void {
@@ -55,17 +72,7 @@ export class NavbarComponent {
   }
 
   toggleDarkMode(): void {
-    this.isDarkMode = !this.isDarkMode;
-    this.applyTheme();
-    localStorage.setItem('theme', this.isDarkMode ? 'dark' : 'light');
-  }
-
-  applyTheme(): void {
-    if (this.isDarkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    this.themeService.toggleDarkMode();
   }
 
   goHome(): void {
@@ -88,6 +95,8 @@ export class NavbarComponent {
   }
 
   get progressPercent(): number {
-    return this.totalTopics > 0 ? (this.currentTopic / this.totalTopics) * 100 : 0;
+    return this.totalTopics > 0
+      ? (this.currentTopic / this.totalTopics) * 100
+      : 0;
   }
 }

@@ -1,21 +1,22 @@
-<div class="bg-white border-t border-gray-200 py-4 px-4 sticky bottom-0 shadow-lg">
+<div class="bg-white border-t border-gray-200 py-4 px-4 sticky bottom-0">
   <div class="container mx-auto flex justify-between items-center">
-    <button 
-      pButton 
-      label="Previous" 
-      icon="pi pi-arrow-left" 
-      class="p-button-outlined"
+    <button
+      pButton
+      label="Previous"
+      icon="pi pi-arrow-left"
       [disabled]="!hasPrevious"
-      (click)="onPrevious()">
-    </button>
-    <span class="text-sm text-gray-600 hidden md:inline">Navigate through topics</span>
-    <button 
-      pButton 
-      label="Next" 
-      icon="pi pi-arrow-right" 
+      (click)="onPrevious()"
+    ></button>
+    <span class="text-sm text-gray-600 hidden md:inline"
+      >Navigate through topics</span
+    >
+    <button
+      pButton
+      label="Next"
+      icon="pi pi-arrow-right"
       iconPos="right"
       [disabled]="!hasNext"
-      (click)="onNext()">
-    </button>
+      (click)="onNext()"
+    ></button>
   </div>
 </div>

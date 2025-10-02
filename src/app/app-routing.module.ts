@@ -5,12 +5,16 @@ import { LearningPageComponent } from './pages/learning-page/learning-page.compo
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  // Legacy path - keep for backward compatibility
   { path: 'learn', component: LearningPageComponent },
-  { path: '**', redirectTo: '' }
+  // New hierarchical routes
+  { path: ':section', component: LearningPageComponent },
+  { path: ':section/:topic', component: LearningPageComponent },
+  { path: '**', redirectTo: '' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

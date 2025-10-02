@@ -1,5 +1,6 @@
 .navbar {
   height: 64px;
+  /* Removed fixed positioning since navbar is now inside right section */
   backdrop-filter: blur(8px);
 }
 
@@ -42,13 +43,14 @@
 }
 
 ::ng-deep .p-progressbar .p-progressbar-value {
-  background: linear-gradient(90deg, #4f46e5 0%, #818cf8 100%);
+  background: #4a5568;
 }
 
 /* Menu customization */
 ::ng-deep .p-menu {
   border-radius: 0.5rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 ::ng-deep .p-menu .p-menuitem-link {

@@ -1,0 +1,10 @@
+/* Footer component styles */
+.footer-content {
+  background-color: #1f2937;
+  color: white;
+  padding: 1rem 0;
+}
+
+.footer-content.dark {
+  background-color: #111827;
+}

@@ -109,9 +109,51 @@ export class TopicLoaderService {
     const topics: Topic[] = [];
 
     try {
-      // Add intermediate topics here as they are created
-      // const arraysTopic = await import('../sections/intermediate/arrays.topic');
-      // topics.push(arraysTopic.arraysTopic);
+      // Dynamically import all intermediate topics
+      const inheritanceTopic = await import(
+        '../sections/intermediate/inheritance.topic'
+      );
+      topics.push(inheritanceTopic.inheritanceTopic);
+
+      const polymorphismTopic = await import(
+        '../sections/intermediate/polymorphism.topic'
+      );
+      topics.push(polymorphismTopic.polymorphismTopic);
+
+      const interfacesAbstractClassesTopic = await import(
+        '../sections/intermediate/interfaces-abstract-classes.topic'
+      );
+      topics.push(
+        interfacesAbstractClassesTopic.interfacesAbstractClassesTopic
+      );
+
+      const collectionsTopic = await import(
+        '../sections/intermediate/collections.topic'
+      );
+      topics.push(collectionsTopic.collectionsTopic);
+
+      const linqTopic = await import('../sections/intermediate/linq.topic');
+      topics.push(linqTopic.linqTopic);
+
+      const delegatesTopic = await import(
+        '../sections/intermediate/delegates.topic'
+      );
+      topics.push(delegatesTopic.delegatesTopic);
+
+      const fileHandlingTopic = await import(
+        '../sections/intermediate/file-handling.topic'
+      );
+      topics.push(fileHandlingTopic.fileHandlingTopic);
+
+      const exceptionHandlingTopic = await import(
+        '../sections/intermediate/exception-handling.topic'
+      );
+      topics.push(exceptionHandlingTopic.exceptionHandlingTopic);
+
+      const structsEnumsTopic = await import(
+        '../sections/intermediate/structs-enums.topic'
+      );
+      topics.push(structsEnumsTopic.structsEnumsTopic);
     } catch (error) {
       console.error('Error loading intermediate topics:', error);
     }

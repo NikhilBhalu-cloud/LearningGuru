@@ -169,8 +169,77 @@ export class TopicLoaderService {
 
     try {
       // Add advanced topics here as they are created
-      // const classesTopic = await import('../sections/advanced/classes.topic');
-      // topics.push(classesTopic.classesTopic);
+      const abstractClassesInterfacesTopic = await import(
+        '../sections/advanced/abstract-classes-interfaces-deep-dive.topic'
+      );
+      topics.push(
+        abstractClassesInterfacesTopic.abstractClassesInterfacesDeepDiveTopic
+      );
+
+      const polymorphismScenariosTopic = await import(
+        '../sections/advanced/polymorphism-scenarios.topic'
+      );
+      topics.push(polymorphismScenariosTopic.polymorphismScenariosTopic);
+
+      const solidPrinciplesTopic = await import(
+        '../sections/advanced/solid-principles.topic'
+      );
+      topics.push(solidPrinciplesTopic.solidPrinciplesTopic);
+
+      const genericsDeepDiveTopic = await import(
+        '../sections/advanced/generics-deep-dive.topic'
+      );
+      topics.push(genericsDeepDiveTopic.genericsDeepDiveTopic);
+
+      const delegatesLambdaTopic = await import(
+        '../sections/advanced/delegates-lambda.topic'
+      );
+      topics.push(delegatesLambdaTopic.delegatesLambdaTopic);
+
+      const eventsObserversTopic = await import(
+        '../sections/advanced/events-observers.topic'
+      );
+      topics.push(eventsObserversTopic.eventsObserversTopic);
+
+      const asyncProgrammingTopic = await import(
+        '../sections/advanced/async-programming.topic'
+      );
+      topics.push(asyncProgrammingTopic.asyncProgrammingTopic);
+
+      const advancedLinqTopic = await import(
+        '../sections/advanced/advanced-linq.topic'
+      );
+      topics.push(advancedLinqTopic.advancedLinqTopic);
+
+      const reflectionAttributesTopic = await import(
+        '../sections/advanced/reflection-attributes.topic'
+      );
+      topics.push(reflectionAttributesTopic.reflectionAttributesTopic);
+
+      const memoryManagementTopic = await import(
+        '../sections/advanced/memory-management.topic'
+      );
+      topics.push(memoryManagementTopic.memoryManagementTopic);
+
+      const threadingTopic = await import(
+        '../sections/advanced/threading.topic'
+      );
+      topics.push(threadingTopic.threadingTopic);
+
+      const designPatternsTopic = await import(
+        '../sections/advanced/design-patterns.topic'
+      );
+      topics.push(designPatternsTopic.designPatternsTopic);
+
+      const fileSerializationTopic = await import(
+        '../sections/advanced/file-serialization.topic'
+      );
+      topics.push(fileSerializationTopic.fileSerializationTopic);
+
+      const advancedFeaturesTopic = await import(
+        '../sections/advanced/advanced-features.topic'
+      );
+      topics.push(advancedFeaturesTopic.advancedFeaturesTopic);
     } catch (error) {
       console.error('Error loading advanced topics:', error);
     }
